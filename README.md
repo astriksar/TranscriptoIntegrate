@@ -2,6 +2,9 @@
 
 This document summarizes common strategies for integrating transcriptomic data across studies, platforms, and systems. The strategies range from low-level data merging to high-level model abstraction.
 
+
+One of the main challenges in bioinformatics transcriptome data analysis is the cross-platform integration of transcriptomic signatures, given the differences in technologies, preprocessing methods, and data distributions across studies. The key challenge in this objective remains the correction of batch effects, systematic differences between studies, labs, or platforms (e.g., microarray vs. RNA-seq), which complicate the detection of true biological signals. Various strategies exist for combining transcriptome data, with the choice of integration method being critical to ensure comparability across studies. 
+
 ---
 
 ## 1️⃣ Data Integration (Technical)
@@ -64,9 +67,11 @@ Methodologically sound approach for multi-study comparisons.
 - Beccacece et al., 2023 Cross-Species Transcriptomics Analysis Highlights Conserved Molecular Responses to Per- and Polyfluoroalkyl Substances [LINK](https://pmc.ncbi.nlm.nih.gov/articles/PMC10385990/)
 
 
-  * Transcriptome-wide signature formula: <mark> −log10(p) × sign(log(FC))</mark>
-  * Ortholog Prediction 
-      → cross-species comparison via common gene identifiers
+  * Transcriptome-wide signature formula: <mark> −log10(p) × sign(log(FC))</mark>, where p represents the p-value of the diff. expression (limma or DESeq2) and FC the fold change
+  * Ortholog Prediction → cross-species comparison via common gene identifiers
+        - DRSC Integrative Ortholog Prediction Tool (DIOPT) database version 9.0; 
+        - R package `orthogene` version 1.4.1; 
+        - bidirectional best-hit approach based on BLASTn version 2.12.0+ 
   * Signature Analysis
       → NES integration: Stouffer method via corto package.
   * Metabolite Prediction
